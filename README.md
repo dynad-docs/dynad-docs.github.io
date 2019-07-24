@@ -1,3 +1,0 @@
-# DynAd
-
-> DynAd adserver
