@@ -191,3 +191,16 @@ For more information about custom pages, click [here](https://docusaurus.io/docs
 # Full Documentation
 
 Full documentation can be found on the [website](https://docusaurus.io/).
+
+# Building
+
+```
+$ cd website
+$ npm run build
+```
+
+# Deploying
+```
+$ git checkout source
+$ GIT_USER=<github_user> CURRENT_BRANCH=master npm run publish-gh-pages
+```
