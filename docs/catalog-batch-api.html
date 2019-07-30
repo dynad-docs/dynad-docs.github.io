@@ -1,0 +1,213 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Catalog Batch API · DynAd Docs</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="A API de catálogo é utilizada para envio de produtos quando há milhões de produtos a serem enviados para o DynAd AdServer."/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Catalog Batch API · DynAd Docs"/><meta property="og:type" content="website"/><meta property="og:url" content="https://dynad-docs.github.io/"/><meta property="og:description" content="A API de catálogo é utilizada para envio de produtos quando há milhões de produtos a serem enviados para o DynAd AdServer."/><meta property="og:image" content="https://dynad-docs.github.io/img/undraw_online.svg"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://dynad-docs.github.io/img/undraw_tweetstorm.svg"/><link rel="shortcut icon" href="/img/favicon.png"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/"><img class="logo" src="/img/header-icon.svg" alt="DynAd Docs"/><h2 class="headerTitleWithLogo">DynAd Docs</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"></ul></nav></div></header></div></div><div class="navPusher singleRowMobileNav"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>API&#x27;s</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">DynAd Docs</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/intro">Introdução</a></li><li class="navListItem"><a class="navItem" href="/docs/doc2">Campanhas</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">API&#x27;s</h3><ul class=""><li class="navListItem navListItemActive"><a class="navItem" href="/docs/catalog-batch-api">Catalog Batch API</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle">Catalog Batch API</h1></header><article><div><span><p>A API de catálogo é utilizada para envio de produtos quando há milhões de produtos a serem enviados para o DynAd AdServer.
+É possível criar, remover e atualizar mais de um produto por requisição.</p>
+<h2><a class="anchor" aria-hidden="true" id="base-url"></a><a href="#base-url" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Base URL</h2>
+<pre><code class="hljs"><span class="hljs-symbol">https:</span><span class="hljs-comment">//catalog.api.dynad.net/v1</span>
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="endpoints"></a><a href="#endpoints" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Endpoints</h2>
+<p>A API consiste no seguinte endpoint</p>
+<table>
+<thead>
+<tr><th><strong>Endpoint</strong></th><th><strong>Descrição</strong></th><th><strong>Versões</strong></th></tr>
+</thead>
+<tbody>
+<tr><td>POST /{customerCode}/batch</td><td>Inserção ou alteração de produto</td><td>1.0</td></tr>
+</tbody>
+</table>
+<h2><a class="anchor" aria-hidden="true" id="requisicões"></a><a href="#requisicões" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Requisições</h2>
+<p>As requisições para a API devem obedecer o seguinte formato:</p>
+<pre><code class="hljs">POST https:<span class="hljs-comment">//catalog.api.dynad.net/v1/{customerCode}/batch</span>
+Content-type: application/<span class="hljs-class">json
+</span>{
+    <span class="hljs-string">"requests"</span>: [
+        {
+            <span class="hljs-string">"method"</span>: <span class="hljs-string">"[ UPSERT | DELETE ]"</span>,
+            <span class="hljs-string">"data"</span>: <span class="hljs-params">&lt;Produto&gt;</span>
+        }
+    ]
+}
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="definicão-de-tipos"></a><a href="#definicão-de-tipos" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Definição de Tipos</h2>
+<p>Esta seção define os atributos permitidos nos dados enviados nas requisições</p>
+<h3><a class="anchor" aria-hidden="true" id="metodo-atributo-method"></a><a href="#metodo-atributo-method" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Método - atributo <code>method</code></h3>
+<ul>
+<li>UPSERT - Utilizado para inserir ou atualizar produtos no catálogo</li>
+<li>DELETE - Utilizado para remover/inativar produto do catálogo</li>
+</ul>
+<h3><a class="anchor" aria-hidden="true" id="produto-atributo-data"></a><a href="#produto-atributo-data" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Produto - atributo <code>data</code></h3>
+<p>Item do catálogo. A tabela abaixo define cada atributo e suas restrições</p>
+<table>
+<thead>
+<tr><th><strong>Field</strong></th><th><strong>Type</strong></th><th><strong>Mandatory</strong></th><th><strong>Description</strong></th></tr>
+</thead>
+<tbody>
+<tr><td>sku</td><td>String</td><td>true</td><td>Itendificador único do produto</td></tr>
+<tr><td>active</td><td>Boolean</td><td>true</td><td>Disponibilidade do produto</td></tr>
+<tr><td>brand</td><td>String</td><td>true</td><td>Marca</td></tr>
+<tr><td>category</td><td>[String]</td><td>true</td><td>Array de categorias do produto. Tamanho limitado a 3</td></tr>
+<tr><td>description</td><td>String</td><td>false</td><td>Descrição do produto</td></tr>
+<tr><td>imagem</td><td>String</td><td>true</td><td>URL da imagem</td></tr>
+<tr><td>name</td><td>String</td><td>true</td><td>Nome o produto</td></tr>
+<tr><td>price</td><td>Float</td><td>false</td><td>Preço original do produto. Padrão ##.##</td></tr>
+<tr><td>sellPrice</td><td>Float</td><td>true</td><td>Proço promocional. Padrão ##.##</td></tr>
+<tr><td>parcels</td><td>Int</td><td>false</td><td>Quantidade de parcelas</td></tr>
+<tr><td>parcelsValue</td><td>Float</td><td>false</td><td>Valor de cada parcela</td></tr>
+<tr><td>url</td><td>String</td><td>true</td><td>URL do produto</td></tr>
+<tr><td>recommendations</td><td>[String]</td><td>false</td><td>Lista de skus de produtos a serem recomendados. Tamanho mínimo de 10</td></tr>
+</tbody>
+</table>
+<h2><a class="anchor" aria-hidden="true" id="remocão-de-produtos-customercode-batch"></a><a href="#remocão-de-produtos-customercode-batch" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Remoção de Produtos - /{customerCode}/batch</h2>
+<p>No caso de remoção, o único campo obrigatório do produto será o sku.</p>
+<pre><code class="hljs"><span class="hljs-symbol">POST</span> https://catalog.api.dynad.net/<span class="hljs-built_in">v1</span>/magalu/<span class="hljs-keyword">batch
+</span></code></pre>
+<p>Conteúdo da requisição</p>
+<pre><code class="hljs">{
+    <span class="hljs-attr">"requests"</span>: [
+        {
+            <span class="hljs-attr">"method"</span>: <span class="hljs-string">"DELETE"</span>,
+            <span class="hljs-attr">"data"</span>: { <span class="hljs-attr">"sku"</span>: <span class="hljs-string">"123"</span> }
+        },
+        {
+            <span class="hljs-attr">"method"</span>: <span class="hljs-string">"DELETE"</span>,
+            <span class="hljs-attr">"data"</span>: { <span class="hljs-attr">"sku"</span>: <span class="hljs-string">"456"</span> }
+        }
+    ]
+}
+</code></pre>
+<p>Reposta:
+200 OK</p>
+<pre><code class="hljs">{
+   <span class="hljs-attr">"status"</span>:<span class="hljs-string">"OK"</span>,
+   <span class="hljs-attr">"response"</span>:[
+      {
+        <span class="hljs-attr">"accepted"</span>:<span class="hljs-literal">true</span>, <span class="hljs-attr">"sku"</span>:<span class="hljs-string">"456"</span>
+      },
+      {
+        <span class="hljs-attr">"accepted"</span>:<span class="hljs-literal">true</span>, <span class="hljs-attr">"sku"</span>:<span class="hljs-string">"123"</span>
+      }
+   ]
+}
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="atualizacão-insercão-de-produtos-customercode-batch"></a><a href="#atualizacão-insercão-de-produtos-customercode-batch" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Atualização/Inserção de Produtos - /{customerCode}/batch</h2>
+<pre><code class="hljs"><span class="hljs-symbol">POST</span> https://catalog.api.dynad.net/<span class="hljs-built_in">v1</span>/magalu/<span class="hljs-keyword">batch
+</span></code></pre>
+<p>Conteúdo da requisição</p>
+<pre><code class="hljs">{
+    <span class="hljs-attr">"requests"</span>: [
+        {
+            <span class="hljs-attr">"method"</span>: <span class="hljs-string">"UPSERT"</span>,
+            <span class="hljs-attr">"data"</span>: {
+                <span class="hljs-attr">"sku"</span>: <span class="hljs-string">"665"</span>,
+                <span class="hljs-attr">"active"</span>: <span class="hljs-literal">true</span>,
+                <span class="hljs-attr">"brand"</span>: <span class="hljs-string">"Mike"</span>,
+                <span class="hljs-attr">"category"</span>: [<span class="hljs-string">"Masculino"</span>, <span class="hljs-string">"Calçados"</span>, <span class="hljs-string">"Nike"</span>],
+                <span class="hljs-attr">"description"</span>: <span class="hljs-string">"Product description"</span>,
+                <span class="hljs-attr">"image"</span>: <span class="hljs-string">"https://image.com/image.jpg"</span>,
+                <span class="hljs-attr">"name"</span>: <span class="hljs-string">"Tênis Nike"</span>,
+                <span class="hljs-attr">"price"</span>: <span class="hljs-number">10.00</span>,
+                <span class="hljs-attr">"sellPrice"</span>: <span class="hljs-number">9.99</span>,
+                <span class="hljs-attr">"parcels"</span>: <span class="hljs-number">10</span>,
+                <span class="hljs-attr">"parcelsValue"</span>: <span class="hljs-number">0.99</span>,
+                <span class="hljs-attr">"url"</span>: <span class="hljs-string">"https://brand.com/nike"</span>,
+                <span class="hljs-attr">"recommendations"</span>: [<span class="hljs-string">"sku1"</span>, <span class="hljs-string">"sku2"</span>]
+            }
+        },
+        {
+            <span class="hljs-attr">"method"</span>: <span class="hljs-string">"UPSERT"</span>,
+            <span class="hljs-attr">"data"</span>: {
+                <span class="hljs-attr">"active"</span>: <span class="hljs-literal">true</span>,
+                <span class="hljs-attr">"brand"</span>: <span class="hljs-string">"Mike"</span>,
+                <span class="hljs-attr">"category"</span>: [<span class="hljs-string">"Masculino"</span>, <span class="hljs-string">"Calçados"</span>, <span class="hljs-string">"Nike"</span>],
+                <span class="hljs-attr">"description"</span>: <span class="hljs-string">"Product description"</span>,
+                <span class="hljs-attr">"image"</span>: <span class="hljs-string">"https://image.com/image.jpg"</span>,
+                <span class="hljs-attr">"name"</span>: <span class="hljs-string">"Tênis Nike"</span>,
+                <span class="hljs-attr">"price"</span>: <span class="hljs-number">10.00</span>,
+                <span class="hljs-attr">"sellPrice"</span>: <span class="hljs-number">9.99</span>,
+                <span class="hljs-attr">"parcels"</span>: <span class="hljs-number">10</span>,
+                <span class="hljs-attr">"parcelsValue"</span>: <span class="hljs-number">0.99</span>,
+                <span class="hljs-attr">"url"</span>: <span class="hljs-string">"https://brand.com/nike"</span>,
+                <span class="hljs-attr">"recommendations"</span>: [<span class="hljs-string">"sku1"</span>, <span class="hljs-string">"sku2"</span>]
+            }
+        },
+        {
+            <span class="hljs-attr">"method"</span>: <span class="hljs-string">"DELETE"</span>,
+            <span class="hljs-attr">"data"</span>: {
+                <span class="hljs-attr">"sku"</span>: <span class="hljs-string">"123"</span>
+            }
+        }
+    ]
+}
+</code></pre>
+<p>Reposta:
+200 OK</p>
+<pre><code class="hljs">{
+   <span class="hljs-attr">"status"</span>:<span class="hljs-string">"OK"</span>,
+   <span class="hljs-attr">"response"</span>:[
+      {
+        <span class="hljs-attr">"accepted"</span>:<span class="hljs-literal">true</span>, <span class="hljs-attr">"sku"</span>:<span class="hljs-string">"665"</span>
+      },
+      {
+        <span class="hljs-attr">"accepted"</span>:<span class="hljs-literal">false</span>, <span class="hljs-attr">"errors"</span>:[{ <span class="hljs-attr">"sku"</span>:<span class="hljs-string">"Invalid value"</span> }]
+      },
+      {
+        <span class="hljs-attr">"accepted"</span>:<span class="hljs-literal">true</span>, <span class="hljs-attr">"sku"</span>:<span class="hljs-string">"123"</span>
+      }
+   ]
+}
+</code></pre>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/doc2"><span class="arrow-prev">← </span><span>Campanhas</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#base-url">Base URL</a></li><li><a href="#endpoints">Endpoints</a></li><li><a href="#requisicões">Requisições</a></li><li><a href="#definicão-de-tipos">Definição de Tipos</a><ul class="toc-headings"><li><a href="#metodo-atributo-method">Método - atributo <code>method</code></a></li><li><a href="#produto-atributo-data">Produto - atributo <code>data</code></a></li></ul></li><li><a href="#remocão-de-produtos-customercode-batch">Remoção de Produtos - /{customerCode}/batch</a></li><li><a href="#atualizacão-insercão-de-produtos-customercode-batch">Atualização/Inserção de Produtos - /{customerCode}/batch</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"><img src="/img/header-icon.svg" alt="DynAd Docs" width="66" height="58"/></a><div><h5>Docs</h5><a href="/docs/en/intro.html">Getting Started (or other categories)</a><a href="/docs/en/campaign.html">Guides (or other categories)</a></div><div><h5>Community</h5><a href="/en/users.html">User Showcase</a><a href="https://stackoverflow.com/questions/tagged/" target="_blank" rel="noreferrer noopener">Stack Overflow</a><a href="https://discordapp.com/">Project Chat</a><a href="https://twitter.com/" target="_blank" rel="noreferrer noopener">Twitter</a></div><div><h5>More</h5><a href="/blog">Blog</a><a href="https://github.com/">GitHub</a><a class="github-button" data-icon="octicon-star" data-count-href="/facebook/docusaurus/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><a href="https://opensource.facebook.com/" target="_blank" rel="noreferrer noopener" class="fbOpenSource"><img src="/img/oss_logo.png" alt="Facebook Open Source" width="170" height="45"/></a><section class="copyright">Copyright © 2019 Your Name or Your Company Name</section></footer></div></body></html>
